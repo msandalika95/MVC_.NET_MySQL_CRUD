@@ -86,10 +86,32 @@ namespace WebApplication3.Controllers
 
         //For UPDATE function ->[S].
 
-        public IActionResult Update()
+        public IActionResult Update(int id)
         {
-            return View();
+            Customer customer = new Customer();
+            using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;database=testa;port=3306;password=123456"))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from customer where id=" + id, con);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    customer.id = Convert.ToInt32(reader["id"]);
+                    customer.code = reader["code"].ToString();
+                    customer.name = reader["name"].ToString();
+
+
+
+                }
+                reader.Close();
+            }
+            return View(customer);
         }
+
+
+
         [HttpPost]
         public IActionResult Update(int id, string code, string name)
         {
