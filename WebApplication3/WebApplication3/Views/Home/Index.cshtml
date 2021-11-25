@@ -1,0 +1,45 @@
+﻿@model List<Customer>
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<head>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<h2 class="text-center">Customers</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>@Html.ActionLink("Create","Create", new { @class="btn btn-success" })</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.code</td>
+                <td>@item.name</td>
+                <td>
+                    
+                    @Html.ActionLink("Update", "Update", new { id = item.id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-danger" })
+
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
